@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/users")
-public class RestController {
+public class UsuarioController {
 
     @Autowired
     private UsuarioRepository repository;
@@ -21,7 +21,7 @@ public class RestController {
     }
 
     //@GetMapping("/{username}")
-    @GetMapping("/users/{username}")
+    @GetMapping("/{username}")
     public Usuario getOne(@PathVariable("username") String username){
         return repository.findByUsername(username);
     }
@@ -35,6 +35,11 @@ public class RestController {
     //@PostMapping("/users")
     @PostMapping()
     public void postUser(@RequestBody Usuario usuario){
+        repository.save(usuario);
+    }
+
+    @PutMapping()
+    public void putUser(@RequestBody Usuario usuario){
         repository.save(usuario);
     }
 }
